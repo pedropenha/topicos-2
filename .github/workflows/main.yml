@@ -31,10 +31,15 @@ jobs:
             scp -i /tmp/private_key -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -r \
             ${{ github.workspace }}/* ubuntu@${{ secrets.HOST }}:/var/www/html/topicos-2
 
+    - name: Indo para a pasta do projeto
+      run: |
+            ssh -i /tmp/private_key -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ubuntu@${{ secrets.HOST }} \
+            cd /var/www/html/topicos-2
+
     - name: Restaurando a aplicação
       run: |
              ssh -i /tmp/private_key -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ubuntu@${{ secrets.HOST }} \
-             sudo composer install /var/www/html/topicos-2 \
+             composer install \
 
     - name: Reiniciando o serviço da aplicação
       run: |
