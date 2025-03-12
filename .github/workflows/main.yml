@@ -34,7 +34,7 @@ jobs:
     - name: Restaurando a aplicação
       run: |
              ssh -i /tmp/private_key -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ubuntu@${{ secrets.HOST }} \
-             cd /var/www/html/topicos-2 && composer install \
+             composer install --working-dir /var/www/html/topicos-2 \
 
     - name: Reiniciando o serviço da aplicação
       run: |
